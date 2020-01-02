@@ -12,7 +12,7 @@ library(TRL)
 
 # Example
 
-A simulation example for 2 stage and 3 treatment per stage.
+A simulation example for 2 stages and 3 treatments per stage.
 
 ```{r}
 library(rpart)

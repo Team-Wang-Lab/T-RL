@@ -1,0 +1,16 @@
+Package: TRL
+Type: Package
+Title: Tree-based Reinforcement Learning for estimating optimal DTR.
+Version: 0.1.0
+Author: Tebin Tao, Nina Zhou, Lu Wang
+Maintainer: Lu Wang <luwang@umich.edu>, Nina Zhou <zhounina@umich.edu>
+Description: We propose a tree-based reinforcement learning (T-RL) method to directly estimate optimal DTRs in a multi-stage multi-treatment setting. At each stage, T-RL builds an unsupervised decision tree that directly handles the problem of optimization with multiple treatment comparisons, through a purity measure constructed with augmented inverse probability weighted estimators.
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+Imports:
+  dplyr,
+  randomForest
+Depends: R(>= 3.5.1)  
+Suggest: knitr,kable
+RoxygenNote: 7.0.2

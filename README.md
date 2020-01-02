@@ -7,7 +7,7 @@ Tree-based reinforcement learning for estimating optimal dynamic treatment regim
 ```{r}
 library(devtools)
 install_github("Team-Wang-Lab/T-RL")
-
+library(TRL)
 ```
 
 # Example

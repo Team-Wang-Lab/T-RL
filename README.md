@@ -1,7 +1,17 @@
 # T-RL
-Tree-based reinforcement learning for estimating optimal dynamic treatment regimes
+
+Tree-based reinforcement learning for estimating optimal dynamic treatment regimes.
 
 # Download 
+
+```{r}
+library(devtools)
+install_github("Team-Wang-Lab/T-RL")
+```
+
+# Example
+
+A simulation example for 2 stage and 3 treatment per stage.
 
 ```{r}
 library(rpart)
@@ -11,8 +21,38 @@ library(randomForest)
 # simulation Stage 2 Treatment 3
 
 ############################################
-# equal/inequal penalty
+# Functions for simulation.
+# function to summarize simulation results
+summary2<-function(x){#x is a numerical vector or matrix
+  s1<-summary(x)
+  sd2<-function(y){
+   return(sd(y,na.rm=T))
+  }
+  if(is.matrix(x)){
+    SD<-apply(x,2,sd2)
+  } else{
+    SD<-sd2(x)
+  }
+  s2<-list(s1,SD)
+  names(s2)<-c("summary","SD")#return summary and sd to each column
+  return(s2)
+}
 
+
+# function to sample treatment A
+# input matrix.pi as a matrix of sampling probabilities, which could be non-normalized
+A.sim<-function(matrix.pi){
+  N<-nrow(matrix.pi) # sample size
+  K<-ncol(matrix.pi) # treatment options
+  if(N<=1 | K<=1) stop("Sample size or treatment options are insufficient!")
+  if(min(matrix.pi)<0) stop("Treatment probabilities should not be negative!")
+
+  # normalize probabilities to add up to 1 and simulate treatment A for each row
+  probs<-t(apply(matrix.pi,1,function(x){x/sum(x,na.rm = TRUE)}))
+  A<-apply(probs,1,function(x) sample(0:(K-1),1,prob = x))
+  return(A)
+}
+############## Simulation start ####################################
 N<-500 # sample size of training data
 N2<-1000 # sample size of test data
 iter<-5 # replication

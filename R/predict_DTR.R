@@ -4,7 +4,7 @@
 #' @param newdata New data containing H (history).
 #' @export
 
-predict.DTR<-function(treeout,newdata){
+predict_DTR<-function(treeout,newdata){
   n<-nrow(newdata)
   predicts<-rep(NA,n)
   
